@@ -32,6 +32,32 @@ Implement fundamental data structures **from scratch**:
   * Q1: `RemoveDuplicates.java`
   * Q2: `Parentheses.java`
   * Q3: `Josephus.java`
+ 
+# Project Layout & Rules
+
+```text
+a1-lists-and-nodes/
+├─ gradlew / gradlew.bat / build.gradle     (provided; do not edit)
+├─ src
+│  └─ main
+│     └─ java
+│        ├─ RemoveDuplicates.java           (you add)
+│        ├─ Parentheses.java                (you add)
+│        └─ Josephus.java                   (you add)
+└─ (other project files)                    (do not edit)
+```
+
+* **Only add code in** `src/main/java/`.
+* **Do not** modify Gradle files, tests, or anything outside `src/main/java/`.
+* Your classes must be named exactly:
+
+  * `RemoveDuplicates`
+  * `Parentheses`
+  * `Josephus`
+* Your code **must compile** with the provided Gradle wrapper.
+* Follow the assignment’s **I/O contract** exactly as described in the instructions so tests can run.
+
+---
 
 ### Compile
 
@@ -333,3 +359,69 @@ public class Josephus {
 * Keep **one public class per file** with the **exact filenames** listed.
 * Use `StdIn`/`StdOut` from `algs4.jar` for I/O (no `Scanner`/`System.out` mixing).
 * Make sure your program **compiles and runs** with the commands shown above.
+
+
+# Connect IntelliJ to Your Private GitHub Classroom Repo
+
+## 1) Get your private repo (GitHub Classroom)
+
+1. Open the **assignment invitation link** from your instructor/TA.
+2. Click **Accept assignment**. Classroom creates a **private repository** for you in the course org. Some assignments include starter code/tests; others may be empty. See **GitHub Classroom** docs for an overview.
+
+---
+
+## 2) Create a Fine-Grained Personal Access Token (PAT)
+
+Use a **fine-grained** PAT to authenticate Git operations (clone/fetch/pull/push) from IntelliJ.
+
+1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
+2. **Resource owner:** select your course org (e.g., `SMU-CompSci`).
+3. **Repository access:** choose **All repositories** (safe here because the org gives you only your private assignment repos).
+4. **Repository permissions:** set **Repository → Contents: Read and write**. (*Metadata: Read* is added automatically if needed.)
+5. Choose a reasonable **Expiration** (e.g., end of term), click **Generate**, and **copy** the token (store it securely; never commit it).
+6. If the org requires approval or SSO, the token may show **pending approval** until a maintainer approves.
+
+> **Why fine-grained?** It limits access by **owner/repos** and **granular permissions** (e.g., Contents Only), unlike broad classic scopes.
+
+### Classic scopes ↔ Fine-grained permissions (reference; no admin needed)
+
+* **`repo` (classic)** → **Repository → Contents (read/write)** is the fine-grained equivalent you need for pushes.
+* **`repo:status`** → Commit statuses (only if CI needs to set them).
+* **`workflow`** → GitHub Actions control (not needed for basic Git).
+* **`admin:org` / `read:org`** → Org-level permissions (not needed for student Git use).
+  Use **Contents (read/write)** only unless your instructor requests more.
+
+---
+
+## 3) Add your token/account to IntelliJ
+
+1. IntelliJ: **File → Settings → Version Control → GitHub → Add account → Log In with Token**.
+2. Paste the token → **Add Account**. IntelliJ stores credentials in your OS keychain/Password Safe.
+
+> **Tip:** Verify IntelliJ sees Git: **Settings → Version Control → Git → Test** (path to your Git executable).
+
+---
+
+## 4) Import (clone) your repo into IntelliJ
+
+1. In GitHub, open your private repo → **Code → HTTPS** → copy the URL.
+2. IntelliJ (Welcome screen): **Get from VCS** (or **File → New → Project from Version Control**) → paste the URL → choose a local folder → **Clone**.
+3. IntelliJ will detect **Gradle** and import the build. If prompted, **Trust** the project.
+
+> Re-opening an existing checkout later? **Open** the project root (or `build.gradle`) and IntelliJ will re-import Gradle. 
+
+---
+
+## 5) Basic Git in IntelliJ: Pull → Commit → Push
+
+* **Pull/Fetch:** Use the **Git** widget (top-right) or **Git → Pull** / **Fetch** to sync starter/tests.
+* **Commit:** Open the **Commit** tool window, write a clear message, **Commit**.
+* **Push:** **Git → Push…** to send commits to GitHub; the first push uses your saved token.
+
+---
+
+## 6) Quick checks & common fixes
+
+* **Push rejected (non-fast-forward):** You’re behind. **Git → Pull** (optionally **rebase**), resolve conflicts, then **Push**.
+* **403 / auth failed on push:** Confirm your token is **fine-grained**, owned by the **course org**, with **Repository → Contents: Read & write**. If the org gates tokens with SSO/approval, wait for approval.
+* **Gradle not importing / build errors in IDE:** Re-open from `build.gradle` or click **Reload All Gradle Projects**. If needed, **Invalidate Caches / Restart** and re-import.
