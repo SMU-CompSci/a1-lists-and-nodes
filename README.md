@@ -379,7 +379,8 @@ Use a **fine-grained** PAT to authenticate Git operations (clone/fetch/pull/push
 3. **Repository access:** choose **All repositories** (safe here because the org gives you only your private assignment repos).
 4. **Repository permissions:** set **Repository → Contents: Read and write**. (*Metadata: Read* is added automatically if needed.)
 5. Choose a reasonable **Expiration** (e.g., end of term), click **Generate**, and **copy** the token (store it securely; never commit it).
-6. If the org requires approval or SSO, the token may show **pending approval** until a maintainer approves.
+6. **Email the TA** that you’ve requested to connect to `SMU-CompSci` so they can grant access.
+7. After access is granted, you can **pull/push/commit** to your assignment repos from Eclipse for the rest of the semester.
 
 > **Why fine-grained?** It limits access by **owner/repos** and **granular permissions** (e.g., Contents Only), unlike broad classic scopes.
 
