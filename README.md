@@ -405,7 +405,7 @@ Use a **fine-grained** PAT to authenticate Git operations (clone/fetch/pull/push
 
 ## 4) Import (clone) your repo into IntelliJ
 
-1. In GitHub, open your private repo → **Code → HTTPS** → copy the URL.
+1. In GitHub, open your private repo → **Code → copy the URL at the top.
 2. IntelliJ (Welcome screen): **Get from VCS** (or **File → New → Project from Version Control**) → paste the URL → choose a local folder → **Clone**.
 3. IntelliJ will detect **Gradle** and import the build. If prompted, **Trust** the project.
 
