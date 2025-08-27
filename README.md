@@ -1,3 +1,5 @@
+---
+
 # A1 — Lists and Nodes (CS 2341, Fall 2025)
 
 * **Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
@@ -29,11 +31,13 @@ Implement fundamental data structures **from scratch**:
 * **Forbidden:** All `java.util.*` collections (`ArrayList`, `LinkedList`, `Stack`, `Queue`, etc.).
 * **Required filenames (one public class per file):**
 
-  * Q1: `RemoveDuplicates.java`
-  * Q2: `Parentheses.java`
-  * Q3: `Josephus.java`
- 
-# Project Layout & Rules
+    * Q1: `RemoveDuplicates.java`
+    * Q2: `Parentheses.java`
+    * Q3: `Josephus.java`
+
+---
+
+## Project Layout & Rules
 
 ```text
 a1-lists-and-nodes/
@@ -41,45 +45,60 @@ a1-lists-and-nodes/
 ├─ src
 │  └─ main
 │     └─ java
-│        └─ com.student_word    
-│           ├─ RemoveDuplicates.java           (you add)
-│           ├─ Parentheses.java                (you add)
-│           └─ Josephus.java                   (you add)
+│        └─ com
+│           └─ student_word
+│              ├─ RemoveDuplicates.java     (you add)
+│              ├─ Parentheses.java          (you add)
+│              └─ Josephus.java             (you add)
 └─ (other project files)                    (do not edit)
 ```
 
-* **Only add code in** `src/main/java/`.
-* **Do not** modify Gradle files, tests, or anything outside `src/main/java/`.
+* **Only add code** under `src/main/java/com/student_word/`.
+* **Do not** modify Gradle files, tests, or anything outside `src/main/java/com/student_word/`.
 * Your classes must be named exactly:
 
-  * `RemoveDuplicates`
-  * `Parentheses`
-  * `Josephus`
+    * `RemoveDuplicates`
+    * `Parentheses`
+    * `Josephus`
 * Your code **must compile** with the provided Gradle wrapper.
-* Follow the assignment’s **I/O contract** exactly as described in the instructions so tests can run.
+* Follow the assignment’s **I/O contract** exactly as described so tests can run.
 
 ---
 
-### Compile
+## Build & Run
+
+### Using Gradle (recommended)
 
 ```bash
-# macOS/Linux
-javac -cp .:algs4.jar RemoveDuplicates.java Parentheses.java Josephus.java
-
-# Windows
-javac -cp .;algs4.jar RemoveDuplicates.java Parentheses.java Josephus.java
+# macOS/Linux/Windows (PowerShell/CMD)
+./gradlew clean test     # compiles and runs tests
+./gradlew build          # builds (and tests) the project
 ```
 
-### Run
+If you want to run a class manually (outside tests), run it with `java` using the compiled classes:
 
 ```bash
 # macOS/Linux
-java -cp .:algs4.jar ClassName < input.txt
-java -cp .:algs4.jar ClassName arg1 arg2
+java -cp build/classes/java/main:algs4.jar com.student_word.ClassName < input.txt
+java -cp build/classes/java/main:algs4.jar com.student_word.ClassName arg1 arg2
 
 # Windows
-java -cp .;algs4.jar ClassName < input.txt
-java -cp .;algs4.jar ClassName arg1 arg2
+java -cp build\classes\java\main;algs4.jar com.student_word.ClassName < input.txt
+java -cp build\classes\java\main;algs4.jar com.student_word.ClassName arg1 arg2
+```
+
+> If your Gradle build already declares `algs4` as a dependency, you can omit `algs4.jar` from the `-cp` above.
+
+### Plain `javac` (fallback)
+
+```bash
+# macOS/Linux
+javac -cp .:algs4.jar -d out src/main/java/com/student_word/*.java
+java  -cp out:algs4.jar com.student_word.ClassName
+
+# Windows
+javac -cp .;algs4.jar -d out src\main\java\com\student_word\*.java
+java  -cp out;algs4.jar com.student_word.ClassName
 ```
 
 ---
@@ -142,9 +161,11 @@ value_n
 1 2 3 4
 ```
 
-### Starter Code (signatures only — no implementation)
+### Starter Code
 
 ```java
+package com.student_word;
+
 // You will design the fields/constructors.
 class IntNode {
     // e.g., data, next
@@ -217,6 +238,8 @@ true
 ### Starter Code (signatures only — no implementation)
 
 ```java
+package com.student_word;
+
 // Implement a character stack backed by a resizing char[].
 class ResizingCharStack {
     ResizingCharStack() {
@@ -275,11 +298,12 @@ public class Parentheses {
 
 ### Input Format
 
-Run as:
-
 ```bash
-java -cp .:algs4.jar Josephus 7 2   # macOS/Linux
-java -cp .;algs4.jar Josephus 7 2   # Windows
+# macOS/Linux
+java -cp build/classes/java/main:algs4.jar com.student_word.Josephus 7 2
+
+# Windows
+java -cp build\classes\java\main;algs4.jar com.student_word.Josephus 7 2
 ```
 
 ### Constraints
@@ -296,6 +320,8 @@ java -cp .;algs4.jar Josephus 7 2   # Windows
 ### Starter Code (signatures only — no implementation)
 
 ```java
+package com.student_word;
+
 // You will design the fields/constructors.
 class IntNode {
     // e.g., data, next
@@ -355,19 +381,20 @@ public class Josephus {
 
 ---
 
-### Submission Tips
+## Submission Tips
 
 * Keep **one public class per file** with the **exact filenames** listed.
 * Use `StdIn`/`StdOut` from `algs4.jar` for I/O (no `Scanner`/`System.out` mixing).
 * Make sure your program **compiles and runs** with the commands shown above.
 
+---
 
 # Connect IntelliJ to Your Private GitHub Classroom Repo
 
 ## 1) Get your private repo (GitHub Classroom)
 
 1. Open the **assignment invitation link** from your instructor/TA.
-2. Click **Accept assignment**. Classroom creates a **private repository** for you in the course org. Some assignments include starter code/tests; others may be empty. See **GitHub Classroom** docs for an overview.
+2. Click **Accept assignment**. Classroom creates a **private repository** for you in the course org. Some assignments include starter code/tests; others may be empty.
 
 ---
 
@@ -375,55 +402,49 @@ public class Josephus {
 
 Use a **fine-grained** PAT to authenticate Git operations (clone/fetch/pull/push) from IntelliJ.
 
-1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**.
+1. GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**
 2. **Resource owner:** select your course org (e.g., `SMU-CompSci`).
-3. **Repository access:** choose **All repositories** (safe here because the org gives you only your private assignment repos).
-4. **Repository permissions:** set **Repository → Contents: Read and write**. (*Metadata: Read* is added automatically if needed.)
-5. Choose a reasonable **Expiration** (e.g., end of term), click **Generate**, and **copy** the token (store it securely; never commit it).
-6. **Email the TA** that you’ve requested to connect to `SMU-CompSci` so they can grant access.
-7. After access is granted, you can **pull/push/commit** to your assignment repos from Eclipse for the rest of the semester.
+3. **Repository access:** choose **All repositories** (the org only gives you private assignment repos).
+4. **Repository permissions:** **Repository → Contents: Read and write**. (*Metadata: Read* is fine.)
+5. Choose an **Expiration** (e.g., end of term), **Generate**, and **copy** the token (store it securely).
+6. If org approval/SSO is required, notify the TA so they can grant access.
+7. After approval, you can pull/push for the rest of the term.
 
-> **Why fine-grained?** It limits access by **owner/repos** and **granular permissions** (e.g., Contents Only), unlike broad classic scopes.
+**Classic scopes ↔ Fine-grained permissions (reference):**
 
-### Classic scopes ↔ Fine-grained permissions (reference; no admin needed)
-
-* **`repo` (classic)** → **Repository → Contents (read/write)** is the fine-grained equivalent you need for pushes.
-* **`repo:status`** → Commit statuses (only if CI needs to set them).
-* **`workflow`** → GitHub Actions control (not needed for basic Git).
-* **`admin:org` / `read:org`** → Org-level permissions (not needed for student Git use).
-  Use **Contents (read/write)** only unless your instructor requests more.
+* `repo` → **Repository / Contents (read & write)** (sufficient for pushes)
+* No admin/Actions permissions required for basic Git.
 
 ---
 
 ## 3) Add your token/account to IntelliJ
 
-1. IntelliJ: **File → Settings → Version Control → GitHub → Add account → Log In with Token**.
-2. Paste the token → **Add Account**. IntelliJ stores credentials in your OS keychain/Password Safe.
-
-> **Tip:** Verify IntelliJ sees Git: **Settings → Version Control → Git → Test** (path to your Git executable).
+1. IntelliJ: **File → Settings → Version Control → GitHub → Add account → Log In with Token**
+2. Paste token → **Add Account**
+3. Verify Git path: **Settings → Version Control → Git → Test**
 
 ---
 
 ## 4) Import (clone) your repo into IntelliJ
 
-1. In GitHub, open your private repo → **Code → copy the URL at the top.
-2. IntelliJ (Welcome screen): **Get from VCS** (or **File → New → Project from Version Control**) → paste the URL → choose a local folder → **Clone**.
-3. IntelliJ will detect **Gradle** and import the build. If prompted, **Trust** the project.
-
-> Re-opening an existing checkout later? **Open** the project root (or `build.gradle`) and IntelliJ will re-import Gradle. 
+1. In GitHub, open your private repo → **Code → copy URL**
+2. IntelliJ (Welcome) **Get from VCS** (or **File → New → Project from Version Control**) → paste URL → choose folder → **Clone**
+3. **Trust** the project when prompted; Gradle will auto-import
 
 ---
 
 ## 5) Basic Git in IntelliJ: Pull → Commit → Push
 
-* **Pull/Fetch:** Use the **Git** widget (top-right) or **Git → Pull** / **Fetch** to sync starter/tests.
-* **Commit:** Open the **Commit** tool window, write a clear message, **Commit**.
-* **Push:** **Git → Push…** to send commits to GitHub; the first push uses your saved token.
+* **Pull/Fetch:** **Git → Pull** / **Fetch**
+* **Commit:** Use the **Commit** tool window → message → **Commit**
+* **Push:** **Git → Push…** (uses your saved token)
 
 ---
 
 ## 6) Quick checks & common fixes
 
-* **Push rejected (non-fast-forward):** You’re behind. **Git → Pull** (optionally **rebase**), resolve conflicts, then **Push**.
-* **403 / auth failed on push:** Confirm your token is **fine-grained**, owned by the **course org**, with **Repository → Contents: Read & write**. If the org gates tokens with SSO/approval, wait for approval.
-* **Gradle not importing / build errors in IDE:** Re-open from `build.gradle` or click **Reload All Gradle Projects**. If needed, **Invalidate Caches / Restart** and re-import.
+* **Non-fast-forward / push rejected:** **Pull** (optionally **rebase**), resolve conflicts, then **Push**
+* **403 / auth failed:** Token must be **fine-grained**, **owned by course org**, with **Repository → Contents: Read & write**; confirm org approval
+* **Gradle import issues:** Re-open from `build.gradle` or **Reload All Gradle Projects**; if needed, **Invalidate Caches / Restart**
+
+---
