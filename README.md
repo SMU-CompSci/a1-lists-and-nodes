@@ -41,9 +41,10 @@ a1-lists-and-nodes/
 ├─ src
 │  └─ main
 │     └─ java
-│        ├─ RemoveDuplicates.java           (you add)
-│        ├─ Parentheses.java                (you add)
-│        └─ Josephus.java                   (you add)
+│        └─ com.student_word    
+│           ├─ RemoveDuplicates.java           (you add)
+│           ├─ Parentheses.java                (you add)
+│           └─ Josephus.java                   (you add)
 └─ (other project files)                    (do not edit)
 ```
 
