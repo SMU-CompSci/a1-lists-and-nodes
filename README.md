@@ -2,7 +2,8 @@
 
 * **Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
 * **Due:** Thu, **Sep 4, 2025**, 11:59 PM (America/Chicago)
-* **Late policy:** 0–2 days: −20%; 2–4 days: −40%; 4–7 days: −60%; >7 days: no credit.
+* **Late policy:** 2 days: −10%; 3 days: −20%; 4 days: −30%; >10 days: no credit.
+
 
 ---
 
@@ -361,17 +362,12 @@ public class Josephus {
 
 ## Grading Criteria
 
-**Functionality (60%)**
+**Functionality (50%)**
 
 * Correct output on provided and hidden tests
 * Proper handling of edge cases
 
-**Code Quality (25%)**
-
-* Readable, well-commented code
-* Meaningful names; clear encapsulation
-
-**Data Structure Implementation (15%)**
+**Data Structure Implementation (50%)**
 
 * Custom structures only (no `java.util` collections)
 * Correct node/container designs per problem
