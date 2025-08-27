@@ -1,4 +1,4 @@
-# CS 2341 — A1: Lists and Nodes (Fall 2025)
+# A1 — Lists and Nodes (CS 2341, Fall 2025)
 
 **Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
 **Due:** Thu, **Sep 4, 2025**, 11:59 PM (America/Chicago)
