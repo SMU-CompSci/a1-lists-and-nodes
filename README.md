@@ -2,7 +2,7 @@
 
 * **Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
 * **Due:** Thu, **Sep 4, 2025**, 11:59 PM (America/Chicago)
-* **Late policy:** 2 days: −10%; 3 days: −20%; 4 days: −30%; >10 days: no credit.
+* **Late policy:** 1 days: −10%; 2 days: −20%; 3 days: −30%; >10 days: no credit.
 
 
 ---
