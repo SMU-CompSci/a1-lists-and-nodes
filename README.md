@@ -1,8 +1,8 @@
 # A1 — Lists and Nodes (CS 2341, Fall 2025)
 
-**Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
-**Due:** Thu, **Sep 4, 2025**, 11:59 PM (America/Chicago)
-**Late policy:** 0–2 days: −20%; 2–4 days: −40%; 4–7 days: −60%; >7 days: no credit.
+* **Points:** Q1 (20) + Q2 (40) + Q3 (40) = **100**
+* **Due:** Thu, **Sep 4, 2025**, 11:59 PM (America/Chicago)
+* **Late policy:** 0–2 days: −20%; 2–4 days: −40%; 4–7 days: −60%; >7 days: no credit.
 
 ---
 
