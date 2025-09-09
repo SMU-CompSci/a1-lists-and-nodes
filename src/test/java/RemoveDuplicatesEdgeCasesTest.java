@@ -1,3 +1,5 @@
+package com.student_word;
+
 import com.student_word.RemoveDuplicates;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,68 +34,32 @@ public class RemoveDuplicatesEdgeCasesTest {
     private InputStream originalIn;
     private ByteArrayOutputStream outContent;
 
-    /**
-     * Rewire StdIn and StdOut to the current System.in and System.out.
-     *
-     * <p>The algs4 StdIn and StdOut classes keep static references to
-     * input and output streams that are initialized when the classes
-     * are first loaded. When tests replace System.in and System.out,
-     * StdIn and StdOut must be re-bound via reflection to avoid
-     * reading from stale streams or writing to a closed PrintWriter.
-     */
+    // ----- Helpers to isolate algs4 static IO between tests -----
+
+    /** Rewire StdIn and StdOut to the current System.in and System.out. */
     private static void rewireStdIO() {
         try {
-            // Resync StdIn to current System.in
+            // StdIn: invoke private static resync()
             Method resync = StdIn.class.getDeclaredMethod("resync");
             resync.setAccessible(true);
             resync.invoke(null);
 
-            // Reset StdOut's internal PrintWriter to current System.out
+            // StdOut: replace private static PrintWriter 'out' to wrap current System.out
             Field outField = StdOut.class.getDeclaredField("out");
             outField.setAccessible(true);
-            // Use US_ASCII to match the test's output encoding
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out, StandardCharsets.US_ASCII), true);
+            PrintWriter pw = new PrintWriter(
+                    new OutputStreamWriter(System.out, StandardCharsets.US_ASCII),
+                    true);
             outField.set(null, pw);
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException("Failed to rewire StdIn/StdOut for test isolation", e);
         }
     }
 
-    /**
-     * Sets System.in to the given ASCII text and resyncs StdIn to read from it.
-     *
-     * <p>This helper encapsulates resetting the standard input stream
-     * and ensuring StdIn uses the new stream. It should be called at
-     * the start of each test after constructing the input string.
-     *
-     * @param text the full input string, including newline separators
-     */
+    /** Set System.in to ASCII bytes of given text and resync StdIn to it. */
     private static void setAsciiInput(String text) {
         System.setIn(new ByteArrayInputStream(text.getBytes(StandardCharsets.US_ASCII)));
-        // Rewire both StdIn and StdOut now that System.in has changed
-        rewireStdIO();
-    }
-
-    @BeforeEach
-    void setUp() {
-        originalOut = System.out;
-        originalIn  = System.in;
-        outContent  = new ByteArrayOutputStream();
-        // Redirect System.out before invoking main so StdOut binds to this buffer.
-        System.setOut(new PrintStream(outContent, true, StandardCharsets.US_ASCII));
-        // Rewire StdIn and StdOut to the newly set streams.
-        rewireStdIO();
-    }
-
-    @AfterEach
-    void tearDown() throws IOException {
-        // Restore original System.out and System.in first
-        System.setOut(originalOut);
-        System.setIn(originalIn);
-        // Rewire StdIn and StdOut to their original streams so they no longer
-        // reference the ByteArrayOutputStream which will be closed.
-        rewireStdIO();
-        outContent.close();
+        rewireStdIO(); // ensure StdIn reads this new System.in
     }
 
     /** Normalize line endings to '\n' for cross-platform assertions. */
@@ -105,6 +71,35 @@ public class RemoveDuplicatesEdgeCasesTest {
     private String captured() {
         return normalize(new String(outContent.toByteArray(), StandardCharsets.US_ASCII));
     }
+
+    /** Make control characters visible in failure messages. */
+    private static String printable(String s) {
+        return s.replace("\r", "\\r").replace("\n", "\\n");
+    }
+
+    // ----- JUnit lifecycle -----
+
+    @BeforeEach
+    void setUp() {
+        originalOut = System.out;
+        originalIn  = System.in;
+        outContent  = new ByteArrayOutputStream();
+
+        // Bind System.out to our buffer for this test, then rewire StdOut to it.
+        System.setOut(new PrintStream(outContent, true, StandardCharsets.US_ASCII));
+        rewireStdIO();
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        // Restore real System streams, rewire StdOut to the real System.out, then close buffer.
+        System.setOut(originalOut);
+        System.setIn(originalIn);
+        rewireStdIO();
+        outContent.close();
+    }
+
+    // ----- Tests -----
 
     @Test
     @DisplayName("Empty list (n=0) should print a blank line")
@@ -321,11 +316,5 @@ public class RemoveDuplicatesEdgeCasesTest {
                 "Expected each test case output on its own line in order, but got: " + printable(actual)
                         + "\nHint: Read t, then loop t times building a fresh list for each case. "
                         + "Do not carry state across cases.");
-    }
-
-    /** Make control characters visible in failure messages. */
-    private static String printable(String s) {
-        // Replace newlines and carriage returns with visible tokens for debugging.
-        return s.replace("\r", "\\r").replace("\n", "\\n");
     }
 }
